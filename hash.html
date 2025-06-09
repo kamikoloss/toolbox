@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Hash</title>
+</head>
+
+<body>
+    <div id="menu"></div>
+    <div id="page">
+        <div>
+            <div>Source</div>
+            <input type="text" id="source" value="Sample" class="max-width-640" />
+            <button type="button" id="random">Random</button>
+        </div>
+        <!--
+        <div>
+            <div>MD5</div>
+            <div id="md5" class="result max-width-640"></div>
+        </div>
+        -->
+        <div>
+            <div>SHA-1</div>
+            <div id="sha1" class="result max-width-640"></div>
+        </div>
+        <div>
+            <div>SHA-256</div>
+            <div id="sha256" class="result max-width-640"></div>
+        </div>
+        <div>
+            <div>SHA-512</div>
+            <div id="sha512" class="result max-width-640"></div>
+        </div>
+    </div>
+    <script>
+        const sourceInput = document.getElementById('source');
+        const randomButton = document.getElementById('random');
+        //const md5Block = document.getElementById('md5');
+        const sha1Block = document.getElementById('sha1');
+        const sha256Block = document.getElementById('sha256');
+        const sha512Block = document.getElementById('sha512');
+
+        const getHashHex = async (value, algorithm) => {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(value);
+            const hashBuffer = await crypto.subtle.digest(algorithm, data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+        const refreshHashes = async (value) => {
+            //md5Block.innerHTML = 'TODO';
+            sha1Block.innerHTML = await getHashHex(value, 'SHA-1');
+            sha256Block.innerHTML = await getHashHex(value, 'SHA-256');
+            sha512Block.innerHTML  = await getHashHex(value, 'SHA-512');
+        }
+        const setRandomSource = (length) => {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            const array = new Uint8Array(length);
+            crypto.getRandomValues(array);
+            for (let i = 0; i < length; i++) {
+                result += chars[array[i] % chars.length];
+            }
+            sourceInput.value = result;
+            refreshHashes(result);
+        }
+
+        refreshHashes(sourceInput.value);
+        sourceInput.addEventListener('input', event => refreshHashes(event.target.value));
+        randomButton.addEventListener('click', event => setRandomSource(16));
+    </script>
+    <script src="./menu.js"></script>
+</body>
+
+</html>

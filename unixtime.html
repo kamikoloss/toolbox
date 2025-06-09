@@ -14,30 +14,33 @@
     <div id="page">
         <div>
             <div>Unixtime (Seconds)</div>
-            <input type="text" id="unixtime-sec">
+            <input type="text" id="unixtime-sec" />
         </div>
         <div>
             <div>Unixtime (Milliseconds)</div>
-            <input type="text" id="unixtime-milliec">
+            <input type="text" id="unixtime-milliec" />
         </div>
         <div>
             <div>Datetime (UTC)</div>
-            <input type="text" id="datetime">
+            <input type="text" id="datetime" />
             <div id="datetime2" class="text-gray-500"></div>
         </div>
     </div>
     <script>
-        const pad = (num, size = 2) => String(num).padStart(size, '0');
-        const getUtcDatetimeString = (date) => `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}.${pad(date.getUTCMilliseconds(), 3)}`;
         const unixtimeSecInput = document.getElementById('unixtime-sec');
         const unixtimeMillisecInput = document.getElementById('unixtime-milliec');
         const datetimeInput = document.getElementById('datetime');
         const datetimeBlock = document.getElementById('datetime2');
+
+        const pad = (num, size = 2) => String(num).padStart(size, '0');
+        const getUtcDatetimeString = (date) => `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())} ${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}.${pad(date.getUTCMilliseconds(), 3)}`;
+
         const nowDate = new Date();
         unixtimeSecInput.value = parseInt(nowDate.getTime() / 1000);
         unixtimeMillisecInput.value = parseInt(nowDate.getTime());
         datetimeInput.value = getUtcDatetimeString(nowDate);
         datetimeBlock.innerHTML = nowDate;
+
         unixtimeSecInput.addEventListener('input', event => {
             const date = new Date(parseInt(event.target.value) * 1000);
             unixtimeMillisecInput.value = parseInt(date.getTime());

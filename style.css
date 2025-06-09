@@ -49,13 +49,12 @@ button {
     display: block;
     width: 100%;
     max-width: 320px;
-    height: 2rem;
-    padding: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
     border: 1px solid var(--color-gray-500);
 }
 
 input:focus-visible {
-  outline: 1px solid var(--color-gray-500);
+    outline: 1px solid var(--color-gray-500);
 }
 
 img {
@@ -72,6 +71,18 @@ ul {
 ul,
 #page>div {
     margin: 1rem 0;
+}
+
+.result {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-gray-300);
+    word-break: break-all;
+}
+
+.max-width-640 {
+    max-width: 640px;
 }
 
 .text-gray-500 {

@@ -1,5 +1,6 @@
 const siteName = 'GLOXINIA Tools';
 const menu = {
+    '/hash.html': 'Hash',
     '/unixtime.html': 'Unixtime',
 };
 const menuHtml = (link, text) => `<li><a href="${link}">${text}</a></li>`;
