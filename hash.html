@@ -35,7 +35,7 @@
             <div id="sha512" class="result max-width-640"></div>
         </div>
     </div>
-    <script>        
+    <script>
         const sourceInput = document.getElementById('source');
         const randomButton = document.getElementById('random');
         const md5Block = document.getElementById('md5');
@@ -55,7 +55,7 @@
             md5Block.innerHTML = md5(value);
             sha1Block.innerHTML = await getHashHex(value, 'SHA-1');
             sha256Block.innerHTML = await getHashHex(value, 'SHA-256');
-            sha512Block.innerHTML  = await getHashHex(value, 'SHA-512');
+            sha512Block.innerHTML = await getHashHex(value, 'SHA-512');
         }
         const setRandomSource = (length) => {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
