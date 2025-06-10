@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script src="https://unpkg.com/js-md5@0.8.3/build/md5.min.js"></script>
     <title>Hash</title>
 </head>
 
@@ -17,12 +18,10 @@
             <input type="text" id="source" value="Sample" class="max-width-640" />
             <button type="button" id="random">Random</button>
         </div>
-        <!--
         <div>
             <div>MD5</div>
             <div id="md5" class="result max-width-640"></div>
         </div>
-        -->
         <div>
             <div>SHA-1</div>
             <div id="sha1" class="result max-width-640"></div>
@@ -36,10 +35,10 @@
             <div id="sha512" class="result max-width-640"></div>
         </div>
     </div>
-    <script>
+    <script>        
         const sourceInput = document.getElementById('source');
         const randomButton = document.getElementById('random');
-        //const md5Block = document.getElementById('md5');
+        const md5Block = document.getElementById('md5');
         const sha1Block = document.getElementById('sha1');
         const sha256Block = document.getElementById('sha256');
         const sha512Block = document.getElementById('sha512');
@@ -53,7 +52,7 @@
             return hashHex;
         }
         const refreshHashes = async (value) => {
-            //md5Block.innerHTML = 'TODO';
+            md5Block.innerHTML = md5(value);
             sha1Block.innerHTML = await getHashHex(value, 'SHA-1');
             sha256Block.innerHTML = await getHashHex(value, 'SHA-256');
             sha512Block.innerHTML  = await getHashHex(value, 'SHA-512');
